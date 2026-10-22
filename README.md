@@ -9,11 +9,24 @@ adds its own INTERNET and network-state permissions to talk to Google Play.)
 
 ## What's free and what's in Turbo Pass
 
+The game opens on a **"Who's driving?"** screen:
+
+- **Toddlers (2–4):** the car drives itself and always stays on the road; touching the screen makes it go
+  faster, so little ones can press HONK or ROCKET without also having to steer or hold. Big picture buttons,
+  bright vehicles with cartoon eyes (Bubble car, Police car and Fire truck with flashing lights, School bus,
+  Ice cream truck, Tractor) and a "YAY!" finish.
+- **Little kids (4–7):** the original game: hold to go, upgrades, coins, and eight cars and trucks including a
+  Dump truck and a Semi.
+
+Every vehicle has its own horn (sirens, air horns, a bulb horn, a foghorn, an ice cream jingle, a UFO warble...).
+
 | | Free (after the trial) | With the trial or Turbo Pass |
 |---|---|---|
-| Tracks | Meadow | Meadow, Desert, Snow, Beach, City, Space |
+| Tracks | Meadow | Meadow, Desert, Snow, Beach, City, Space, **Sky Zone**, **Water Zone** |
+| Sky Zone | No | Plane, Helicopter, Jet, UFO on a rainbow sky road |
+| Water Zone | No | Speedboat, Jet Ski on a river |
 | Rockets and Turbo | No (buttons hidden) | Yes |
-| Car shapes | Sports | Sports, Super, Muscle, Rally, Truck, Formula |
+| Vehicles | Sports car (little kids), Bubble car (toddlers) | All of them |
 | Paint | Yellow | All 10 colors |
 | Levels, coins, upgrades, honk | Yes | Yes |
 
