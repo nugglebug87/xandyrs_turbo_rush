@@ -65,4 +65,10 @@ subscription billed through Google Play; cancel any time in Google Play under Pa
 |---|---|
 | App icon (512×512) | `icon-512.png` |
 | Feature graphic (1024×500) | `feature-graphic.png` |
-| Phone screenshots (1080×1920) | `screenshots/1-garage.png` … `screenshots/7-results.png` |
+| Phone screenshots (1080×1920), in this order | `screenshots/1-hold-to-go.png`, `2-turbo-blast.png`, `3-bonk-rockets.png`, `4-six-worlds.png`, `5-dream-car.png`, `6-honk-honk.png`, `7-made-for-kids.png` |
+
+The first three screenshots are what most people see in search results, so they lead with the
+simplest, most exciting moments: holding to go, turbo, and rockets.
+
+To regenerate the art after changing the game, see `promo/`: `node promo/render.js app/src/main/assets/game`
+renders the 3D frames into `promo/frames/`, then `node promo/compose.js store` builds the posters.

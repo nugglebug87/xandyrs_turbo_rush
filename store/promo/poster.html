@@ -1,0 +1,167 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Baloo+2:wght@700;800&display=swap">
+<style>
+:root { --ink:#121318; --sun:#ffc93c; --hot:#ff4d3d; --sky:#37d4ff; --kid:"Baloo 2", "Arial Rounded MT Bold", system-ui, sans-serif; --racing:"Racing Sans One", "Arial Black", sans-serif; }
+html, body { margin:0; background:#000; }
+.poster { position:relative; width:1080px; height:1920px; overflow:hidden; font-family:var(--kid); color:#fff; }
+.poster.wide { width:1024px; height:500px; }
+.bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(1.28) contrast(1.1) brightness(1.04); }
+/* Cinematic grade: warm top light, vignette, letterbox fade */
+.grade { position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(120% 70% at 50% 62%, transparent 45%, rgba(10,8,30,.55) 100%),
+    linear-gradient(180deg, rgba(10,12,40,.62) 0%, rgba(10,12,40,0) 34%, rgba(10,12,40,0) 80%, rgba(10,12,40,.55) 100%); }
+.rays { position:absolute; left:50%; top:330px; width:2200px; height:2200px; margin:-1100px 0 0 -1100px; pointer-events:none; opacity:.22;
+  background:repeating-conic-gradient(from 0deg, #fff6c8 0 6deg, transparent 6deg 18deg);
+  -webkit-mask:radial-gradient(circle, #000 0 18%, transparent 52%); mask:radial-gradient(circle, #000 0 18%, transparent 52%); }
+.streaks { position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background:repeating-linear-gradient(100deg, transparent 0 46px, rgba(255,255,255,.55) 46px 49px, transparent 49px 140px);
+  -webkit-mask:radial-gradient(70% 55% at 50% 60%, transparent 55%, #000 100%); mask:radial-gradient(70% 55% at 50% 60%, transparent 55%, #000 100%); }
+.flare { position:absolute; width:260px; height:260px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, rgba(255,255,255,.95) 0, rgba(255,240,200,.5) 18%, rgba(255,200,120,0) 60%); mix-blend-mode:screen; }
+.flare::after { content:""; position:absolute; left:-260px; right:-260px; top:50%; height:6px; margin-top:-3px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent); }
+.head { position:absolute; left:50%; top:70px; width:960px; transform:translateX(-50%) rotate(-3deg); filter:drop-shadow(0 14px 22px rgba(0,0,0,.55)); }
+.chrome { display:block; width:100%; height:auto; overflow:visible; font-family:var(--racing); }
+.chrome text { paint-order:stroke; stroke-linejoin:round; }
+.cs-outer { fill:#121318; stroke:#121318; filter:url(#cs-drop); }
+.cs-bevel { fill:none; stroke:url(#cs-chrome); }
+.cs-fill { stroke:rgba(255,255,255,.6); stroke-width:1.3px; }
+.pill { position:absolute; left:50%; transform:translateX(-50%) rotate(-2deg); white-space:nowrap;
+  font:800 54px/1 var(--kid); padding:22px 44px 16px; border-radius:999px; border:6px solid var(--ink);
+  background:var(--sun); color:var(--ink); box-shadow:0 10px 0 var(--ink), 0 22px 40px rgba(0,0,0,.45); }
+.pill.blue { background:var(--sky); } .pill.red { background:var(--hot); color:#fff; text-shadow:0 3px 0 rgba(0,0,0,.35); }
+.badge { position:absolute; display:grid; place-items:center; text-align:center; width:230px; height:230px; border-radius:50%;
+  font:800 46px/0.95 var(--kid); color:var(--ink); background:radial-gradient(circle at 35% 30%, #fff6c8, var(--sun) 60%, #e0a400);
+  border:7px solid var(--ink); box-shadow:0 10px 0 var(--ink), 0 24px 40px rgba(0,0,0,.45); transform:rotate(10deg); }
+.badge small { display:block; font-size:25px; margin-top:4px; }
+.burst { position:absolute; pointer-events:none; }
+/* Worlds grid */
+.tiles { position:absolute; left:60px; right:60px; top:560px; display:grid; grid-template-columns:1fr 1fr; gap:34px; }
+.tile { position:relative; height:390px; border-radius:36px; overflow:hidden; border:7px solid var(--ink); box-shadow:0 10px 0 var(--ink), 0 24px 36px rgba(0,0,0,.4); }
+.tile:nth-child(odd) { transform:rotate(-2deg); } .tile:nth-child(even) { transform:rotate(2deg); }
+.tile img { width:100%; height:100%; object-fit:cover; object-position:50% 60%; filter:saturate(1.25) contrast(1.08); }
+.tile span { position:absolute; left:18px; bottom:16px; font:800 50px/1 var(--kid); color:#fff; text-shadow:0 4px 0 var(--ink), 0 0 18px rgba(0,0,0,.6);
+  -webkit-text-stroke:2px var(--ink); paint-order:stroke fill; }
+/* Garage grid */
+.cars { position:absolute; left:60px; right:60px; top:540px; display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+.car { position:relative; background:#fff8e8; border-radius:36px; border:7px solid var(--ink); overflow:hidden; box-shadow:0 10px 0 var(--ink), 0 22px 36px rgba(0,0,0,.4); }
+.car img { display:block; width:100%; height:270px; object-fit:cover; object-position:50% 58%; }
+.car span { display:block; text-align:center; font:800 50px/1 var(--kid); color:var(--ink); padding:12px 0 14px; }
+.paints { position:absolute; left:0; right:0; bottom:70px; display:flex; justify-content:center; gap:16px; }
+.paints i { width:70px; height:70px; border-radius:50%; border:6px solid #fff; box-shadow:0 0 0 5px var(--ink), 0 10px 18px rgba(0,0,0,.4); }
+/* Buttons mock */
+.btnrow { position:absolute; left:0; right:0; bottom:140px; display:flex; justify-content:center; gap:44px; }
+.gbtn { width:230px; height:230px; border-radius:50%; border:9px solid var(--ink); box-shadow:0 12px 0 var(--ink), 0 26px 40px rgba(0,0,0,.45);
+  display:grid; place-items:center; font:400 48px/1 var(--racing); color:var(--ink); }
+.gbtn.honk { background:radial-gradient(circle at 35% 30%, #fff1b8, var(--sun) 55%, #e0a400); transform:scale(1.18) rotate(-6deg); }
+.gbtn.rocket { background:radial-gradient(circle at 35% 30%, #ffd2cc, var(--hot) 60%, #c22a1d); color:#fff; text-shadow:2px 2px 0 var(--ink); }
+.gbtn.turbo { background:radial-gradient(circle at 35% 30%, #d6fbff, var(--sky) 60%, #1c86c9); }
+.tap { position:absolute; font:800 64px/1 var(--kid); color:#fff; -webkit-text-stroke:3px var(--ink); paint-order:stroke fill; text-shadow:0 6px 0 var(--ink); }
+/* Parent card */
+.card { position:absolute; left:80px; right:80px; bottom:150px; background:rgba(255,248,232,.97); color:var(--ink); border-radius:44px;
+  border:7px solid var(--ink); box-shadow:0 12px 0 var(--ink), 0 26px 50px rgba(0,0,0,.45); padding:44px 54px; display:grid; gap:20px; }
+.card div { font:800 52px/1.1 var(--kid); display:flex; align-items:center; gap:22px; }
+.card div::before { content:"\2713"; display:grid; place-items:center; flex:none; width:64px; height:64px; border-radius:50%; background:#2fbf71; color:#fff; font-size:42px; border:5px solid var(--ink); }
+.card .trial { background:var(--sun); margin:6px -20px 0; padding:18px 26px; border-radius:26px; border:5px solid var(--ink); font-size:46px; }
+.card .trial::before { content:"\2605"; background:var(--hot); }
+/* Feature graphic */
+.wide .head { left:40px; top:50%; width:520px; transform:translateY(-58%) rotate(-3deg); }
+.wide .pill { left:300px; top:auto; bottom:44px; font-size:34px; padding:14px 30px 10px; border-width:5px; box-shadow:0 7px 0 var(--ink), 0 14px 26px rgba(0,0,0,.45); }
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" id="chromeDefs">
+  <defs>
+    <linearGradient id="cs-red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffc2c2"/><stop offset=".2" stop-color="#ff4b4b"/><stop offset=".46" stop-color="#b3121a"/>
+      <stop offset=".52" stop-color="#5c0408"/><stop offset=".58" stop-color="#c4161f"/><stop offset=".86" stop-color="#ff6a6a"/><stop offset="1" stop-color="#ffd0d0"/>
+    </linearGradient>
+    <linearGradient id="cs-silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#e6e9ee"/><stop offset=".47" stop-color="#8b929c"/>
+      <stop offset=".52" stop-color="#454a52"/><stop offset=".58" stop-color="#b9bec6"/><stop offset=".82" stop-color="#ffffff"/><stop offset="1" stop-color="#a3a9b2"/>
+    </linearGradient>
+    <linearGradient id="cs-blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2fbff"/><stop offset=".22" stop-color="#4fd9ff"/><stop offset=".47" stop-color="#0d6fb0"/>
+      <stop offset=".52" stop-color="#06345a"/><stop offset=".58" stop-color="#1287cc"/><stop offset=".86" stop-color="#6fe2ff"/><stop offset="1" stop-color="#d8f7ff"/>
+    </linearGradient>
+    <linearGradient id="cs-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff6c8"/><stop offset=".22" stop-color="#ffd23f"/><stop offset=".47" stop-color="#b8790a"/>
+      <stop offset=".52" stop-color="#5e3a02"/><stop offset=".58" stop-color="#d69a12"/><stop offset=".86" stop-color="#ffe27a"/><stop offset="1" stop-color="#fff3c0"/>
+    </linearGradient>
+    <linearGradient id="cs-chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".4" stop-color="#a5acb6"/><stop offset=".5" stop-color="#2c2f35"/>
+      <stop offset=".6" stop-color="#e2e6eb"/><stop offset="1" stop-color="#6b717b"/>
+    </linearGradient>
+    <radialGradient id="cs-flare">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".25" stop-color="#ffe9e9" stop-opacity=".9"/><stop offset="1" stop-color="#ff3b3b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cs-streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="cs-drop" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity=".55"/>
+    </filter>
+  </defs>
+</svg>
+<div id="root"></div>
+<script>
+const escXml = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+function chromeSvg(lines, { size = 100, width, flares = [], edge = 1 } = {}) {
+  const W = width || Math.max(...lines.map(l => String(l.t).length)) * size * 0.62 + 60;
+  const lineH = size * 0.98, H = lines.length * lineH + 34;
+  let out = '';
+  lines.forEach((l, i) => {
+    const y = 14 + (i + 1) * lineH - size * 0.17;
+    const fit = l.fit ? ` textLength="${Math.round((W - 40) * l.fit)}" lengthAdjust="spacingAndGlyphs"` : '';
+    const at = `x="${W / 2}" y="${y}" text-anchor="middle" font-size="${l.size || size}"${fit}`;
+    const t = escXml(l.t);
+    out += `<text ${at} class="cs-outer" style="stroke-width:${18 * edge}px">${t}</text><text ${at} class="cs-bevel" style="stroke-width:${9 * edge}px">${t}</text><text ${at} class="cs-fill" fill="url(#cs-${l.fill})">${t}</text>`;
+  });
+  for (const [fx, fy, fr] of flares) {
+    out += `<ellipse cx="${fx * W}" cy="${fy * H}" rx="${fr * 3.2}" ry="${fr * 0.16}" fill="url(#cs-streak)"/>` +
+      `<circle cx="${fx * W}" cy="${fy * H}" r="${fr}" fill="url(#cs-flare)"/>`;
+  }
+  return `<svg class="chrome" viewBox="0 0 ${W} ${H}" aria-hidden="true">${out}</svg>`;
+}
+
+
+const P = id => document.getElementById('root').innerHTML = posters[id]();
+const head = (a, fa, b, fb) => `<div class="head">${chromeSvg([{ t: a, fill: fa, fit: .78 }, { t: b, fill: fb, fit: 1 }], { size: 120, width: 760, edge: .7, flares: [[0.72, 0.1, 40]] })}</div>`;
+const frame = (src, extra = '') => `<img class="bg" src="frames/${src}"><div class="rays"></div><div class="streaks"></div><div class="grade"></div>${extra}`;
+const posters = {
+  hero: () => `<div class="poster">${frame('hero-meadow.png', '<div class="flare" style="left:690px;top:520px"></div>')}
+    ${head('HOLD', 'red', 'TO GO!', 'silver')}
+    <div class="pill" style="top:520px">One finger. Big smiles!</div>
+    <div class="badge" style="right:60px;bottom:120px">AGES<br>2–7<small>little drivers</small></div></div>`,
+  turbo: () => `<div class="poster">${frame('space-turbo.png')}
+    ${head('TURBO', 'blue', 'BLAST!', 'silver')}
+    <div class="pill blue" style="top:520px">Zoom past the planets!</div></div>`,
+  bonk: () => `<div class="poster">${frame('snow-bonk.png', '<div class="flare" style="left:420px;top:640px"></div>')}
+    ${head('BONK!', 'red', 'ROCKETS', 'silver')}
+    <div class="pill red" style="top:520px">Silly rockets make cars spin!</div>
+    <div class="badge" style="left:60px;bottom:140px;transform:rotate(-10deg)">SO<br>SILLY!<small>no crashes</small></div></div>`,
+  worlds: () => `<div class="poster">${frame('beach-aerial.png')}
+    ${head('6 AMAZING', 'gold', 'WORLDS', 'silver')}
+    <div class="tiles">${[['hero-meadow','Meadow'],['desert-side','Desert'],['snow-bonk','Snow'],['beach-aerial','Beach'],['city-low','City'],['space-turbo','Space']]
+      .map(([f, n]) => `<div class="tile"><img src="frames/${f}.png"><span>${n}</span></div>`).join('')}</div></div>`,
+  garage: () => `<div class="poster">${frame('city-low.png')}
+    ${head('BUILD YOUR', 'red', 'DREAM CAR', 'silver')}
+    <div class="cars">${[['gt','Sports'],['super','Super'],['muscle','Muscle'],['rally','Rally'],['truck','Truck'],['formula','Formula']]
+      .map(([f, n]) => `<div class="car"><img src="frames/car-${f}.png"><span>${n}</span></div>`).join('')}</div>
+    <div class="paints">${['#ffc93c','#ff4d3d','#ff8a1f','#2f7bff','#37d4ff','#2fbf5b','#a24dff','#ff6fb5','#dfe1dc','#23252e'].map(c => `<i style="background:${c}"></i>`).join('')}</div></div>`,
+  honk: () => `<div class="poster">${frame('city-low.png')}
+    ${head('HONK', 'gold', 'HONK!', 'silver')}
+    <div class="pill" style="top:520px">Big buttons for little hands</div>
+    <div class="tap" style="left:150px;bottom:470px;transform:rotate(-12deg)">BEEP<br>BEEP!</div>
+    <div class="btnrow"><div class="gbtn honk">HONK</div><div class="gbtn rocket">ROCKET</div><div class="gbtn turbo">TURBO</div></div></div>`,
+  parents: () => `<div class="poster">${frame('desert-side.png')}
+    ${head('MADE FOR', 'red', 'LITTLE DRIVERS', 'silver')}
+    <div class="card">
+      <div>No ads, ever</div><div>No data collected</div><div>Works offline</div>
+      <div>Grown-ups-only purchases</div><div class="trial">Try everything free for 24 hours</div>
+    </div></div>`,
+  feature: () => `<div class="poster wide"><img class="bg" src="frames/feature-raw.png"><div class="streaks"></div><div class="grade"></div>
+    <div class="head">${chromeSvg([{ t: "XANDYR'S", fill: 'red', fit: .82 }, { t: 'TURBO RUSH', fill: 'silver', fit: 1 }], { size: 100, width: 640, edge: .6, flares: [[0.66, 0.1, 34]] })}</div>
+    <div class="pill">Hold to go! Ages 2–7</div></div>`,
+};
+P(location.hash.slice(1));
+</script></body></html>

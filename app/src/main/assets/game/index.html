@@ -2127,11 +2127,11 @@ rocketBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === 
 window.addEventListener('keydown', e => { if ((e.code === 'KeyF' || e.code === 'KeyR') && !hud.hidden) fireRocket(); });
 
 // ---------- Loop ----------
-let last = performance.now(), clock = 0;
+let last = performance.now(), clock = 0, paused = false;
 function frame(now) {
   const dt = Math.min((now - last) / 1000, 1 / 20);
   last = now; clock += dt;
-  step(dt);
+  if (!paused) step(dt); // paused only by store-screenshot tooling
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }
@@ -2193,6 +2193,9 @@ window.__game = {
   get state() { return state; }, get player() { return player; }, get ais() { return ais; },
   get track() { return T; }, get finishOrder() { return finishOrder; }, save,
   setThrottle(b) { throttle = b; }, step, fireTurbo, fireRocket, pass,
+  // For rendering store screenshots: freeze the simulation and aim the camera by hand.
+  get camera() { return camera; }, get scene() { return scene; }, get cars() { return cars; }, set paused(v) { paused = v; },
+  hideUi() { [hud, menu, results].forEach(el => { el.hidden = true; }); },
 };
 })();
 </script>
