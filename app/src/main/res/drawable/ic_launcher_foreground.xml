@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Yellow sports car with a white racing stripe, inside the adaptive-icon safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#FFFFC93C"
+        android:pathData="M25,64 L26,56 Q27,53 31,52 L42,50 L50,43 Q53,41 57,41 L68,41 Q72,41 75,44 L80,50 L86,52 Q89,53 89,57 L89,64 Z" />
+    <path android:fillColor="#FFFFF8E8"
+        android:pathData="M27,57 L88,57 L88,60 L27,60 Z" />
+    <path android:fillColor="#FF1A2233"
+        android:pathData="M52,49 L57,44 L64,44 L64,49 Z M67,44 L72,44 L77,49 L67,49 Z" />
+    <path android:fillColor="#FF16171C"
+        android:pathData="M33,64 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z M68,64 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0 Z" />
+    <path android:fillColor="#FFCFD6E0"
+        android:pathData="M37,64 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z M72,64 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z" />
+</vector>
