@@ -1,0 +1,35 @@
+name: Android verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check release consistency
+        run: python3 scripts/check_release.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Build debug APK and run unit tests
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon testDebugUnitTest assembleDebug
+      - name: Upload debug APK for review
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xandyrs-turbo-rush-debug
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 7
