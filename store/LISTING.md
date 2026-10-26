@@ -8,7 +8,7 @@ Xandyr's Turbo Rush
 
 ## Short description (max 80 characters)
 
-Hold to go! Race cars, honk, turbo and zoom through 6 worlds. For kids ages 2-7.
+Hold to go! Race cars, honk, turbo and zoom through 8 worlds. For kids ages 2-7.
 
 ## Full description (max 4000 characters)
 
@@ -32,7 +32,7 @@ SKY ZONE AND WATER ZONE
 • Fly a plane, helicopter, jet or UFO along a rainbow road through the clouds
 • Race speedboats and jet skis down a river past lighthouses
 
-SIX MORE WORLDS TO EXPLORE
+SIX CLASSIC WORLDS TO EXPLORE
 • Meadow with pine trees
 • Desert with cactus and rocks
 • Snow with snowmen and falling snowflakes
@@ -53,10 +53,9 @@ MADE FOR KIDS AND PARENTS
 • Grown-ups-only question before any purchase
 
 TURBO PASS
-Try everything free for 24 hours. After that, the Meadow track, the yellow sports car and the toddler bubble
+Enjoy 24 hours of full access with no payment information or subscription required. This is an app-managed preview, not a Google Play subscription free trial, and does not automatically enroll you or charge you. After that, the Meadow track, the yellow sports car and the toddler bubble
 car stay free forever. Turbo Pass unlocks the Sky Zone, the Water Zone, all other worlds, rockets and turbo,
-and every vehicle and color. It's an auto-renewing
-subscription billed through Google Play; cancel any time in Google Play under Payments & subscriptions.
+and every vehicle and color. Turbo Pass is an auto-renewing subscription billed through Google Play only if a parent chooses to purchase it. The price and renewal period appear before purchase; cancel any time in Google Play under Payments & subscriptions.
 
 ## Category and tags
 
@@ -75,7 +74,9 @@ subscription billed through Google Play; cancel any time in Google Play under Pa
 |---|---|
 | App icon (512×512) | `icon-512.png` |
 | Feature graphic (1024×500) | `feature-graphic.png` |
-| Phone screenshots (1080×1920), in this order | `screenshots/1-hold-to-go.png`, `2-turbo-blast.png`, `3-bonk-rockets.png`, `4-six-worlds.png`, `5-dream-car.png`, `6-honk-honk.png`, `7-made-for-kids.png` |
+| Phone screenshots (1080×1920), in this order | `screenshots/1-hold-to-go.png`, `2-turbo-blast.png`, `3-bonk-rockets.png`, `4-six-worlds.png` (outdated six-world headline; replace before submission), `5-dream-car.png`, `6-honk-honk.png`, `7-made-for-kids.png` |
+
+Premium features (Turbo and rockets) shown in screenshots require Turbo Pass after the 24-hour preview. Replace the outdated six-world screenshot with an eight-environment image and visually verify all art against version 1.1 before upload.
 
 The first three screenshots are what most people see in search results, so they lead with the
 simplest, most exciting moments: holding to go, turbo, and rockets.
