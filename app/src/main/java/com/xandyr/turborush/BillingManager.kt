@@ -73,7 +73,7 @@ class BillingManager(context: Context, private val onChange: () -> Unit) : Purch
         val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
         client.queryProductDetailsAsync(params) { result, found ->
             if (result.responseCode == BillingResponseCode.OK) {
-                details = found.productDetailsList.firstOrNull()
+                details = found.productDetailsList.firstOrNull { it.productId == PRODUCT_ID }
                 price = basePlan()?.pricingPhases?.pricingPhaseList?.lastOrNull()
                     ?.let { "${it.formattedPrice} / ${periodLabel(it.billingPeriod)}" } ?: ""
             }
@@ -84,7 +84,7 @@ class BillingManager(context: Context, private val onChange: () -> Unit) : Purch
     /** The plain base plan (no offer ID); falls back to the first offer if that's all there is. */
     private fun basePlan(): ProductDetails.SubscriptionOfferDetails? {
         val offers = details?.subscriptionOfferDetails ?: return null
-        return offers.firstOrNull { it.offerId == null } ?: offers.firstOrNull()
+        return offers.firstOrNull { it.offerId == null }
     }
 
     /** Restores an existing subscription and notices one that has ended. */
@@ -95,8 +95,8 @@ class BillingManager(context: Context, private val onChange: () -> Unit) : Purch
             if (result.responseCode == BillingResponseCode.OK) {
                 subscribed = handle(purchases)
             } else {
-                // Fail closed when a purchase refresh cannot confirm entitlement.
-                subscribed = false
+                // A transient Play outage does not prove that an existing subscription expired.
+                // Keep the last confirmed state until Play returns an authoritative result.
             }
             onChange()
         }
