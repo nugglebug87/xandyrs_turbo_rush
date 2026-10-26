@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Static release checks. Run: python3 scripts/check_release.py"""
 from pathlib import Path
-import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,7 +27,8 @@ def check():
             "README must distinguish preview from Play subscription")
     require("versionCode = 2" in gradle,
             "Expected versionCode 2; update release checklist for a new version")
-    require("6 worlds" not in listing.lower(), "Outdated six-world wording")
+    require("through 6 worlds" not in listing.lower(), "Outdated six-world wording")
+    require("4-six-worlds.png" not in listing, "Replace outdated six-world screenshot reference")
     for error in errors:
         print("FAIL:", error)
     if errors:
