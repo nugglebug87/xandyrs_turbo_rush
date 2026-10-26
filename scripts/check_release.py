@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""Static release checks. Run: python3 scripts/check_release.py"""
+from pathlib import Path
+import re
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+def read(path):
+    return (ROOT / path).read_text(encoding="utf-8")
+
+def check():
+    gradle = read("app/build.gradle.kts")
+    billing = read("app/src/main/java/com/xandyr/turborush/BillingManager.kt")
+    listing = read("store/LISTING.md")
+    readme = read("README.md")
+    errors = []
+    def require(ok, message):
+        if not ok:
+            errors.append(message)
+    require('billing:9.1.0' in gradle, "Expected Billing 9.1.0 dependency")
+    require('PRODUCT_ID = "turbo_pass"' in billing, "Subscription ID mismatch")
+    require('it.offerId == null' in billing and '?: offers.firstOrNull()' not in billing,
+            "Purchase flow must not fall back to promotional offers")
+    require("24 hours" in listing and "does not automatically enroll" in listing,
+            "Store listing must disclose app-managed free access")
+    require("8 worlds" in listing, "Store listing must describe eight worlds")
+    require("does not start a subscription" in readme,
+            "README must distinguish preview from Play subscription")
+    require(bool(re.search(r"versionCode\\s*=\\s*2", gradle)),
+            "Expected versionCode 2; update release checklist for a new version")
+    require("6 worlds" not in listing.lower(), "Outdated six-world wording")
+    for error in errors:
+        print("FAIL:", error)
+    if errors:
+        return 1
+    print("Static release consistency checks passed (not a build or billing integration test).")
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(check())
