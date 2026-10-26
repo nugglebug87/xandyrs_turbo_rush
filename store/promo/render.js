@@ -8,6 +8,7 @@ async function open(b, w, h) {
   const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
   p.errs = []; p.on('pageerror', e => p.errs.push(e.message));
   await p.addInitScript(subscribed);
+  await p.addInitScript(() => localStorage.setItem('hairpin-rush-v1', JSON.stringify({ mode: 'kids' })));
   await p.route('**/*', r => {
     const u = new URL(r.request().url());
     if (u.host !== 'appassets.androidplatform.net') return r.abort();

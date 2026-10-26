@@ -68,6 +68,29 @@ html, body { margin:0; background:#000; }
 /* Feature graphic */
 .wide .head { left:40px; top:50%; width:520px; transform:translateY(-58%) rotate(-3deg); }
 .wide .pill { left:300px; top:auto; bottom:44px; font-size:34px; padding:14px 30px 10px; border-width:5px; box-shadow:0 7px 0 var(--ink), 0 14px 26px rgba(0,0,0,.45); }
+
+/* v1.1 posters */
+.pill.small { font-size: 44px; padding: 18px 36px 13px; }
+.badge.new { background: radial-gradient(circle at 35% 30%, #ffd2cc, #ff4d3d 60%, #b81d12); color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,.35); width: 200px; height: 200px; font-size: 58px; }
+.half { position: absolute; left: 0; right: 0; height: 960px; overflow: hidden; }
+.half.top { top: 0; } .half.bottom { top: 960px; }
+.half img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.28) contrast(1.1) brightness(1.04); }
+.half .grade { background: radial-gradient(120% 80% at 50% 55%, transparent 50%, rgba(10,8,30,.5) 100%); }
+.divider { position: absolute; left: -40px; right: -40px; top: 925px; height: 70px; transform: rotate(-4deg); background: repeating-conic-gradient(#121318 0 25%, #fff 0 50%) 0 0 / 70px 70px; border-block: 8px solid var(--ink); box-shadow: 0 12px 30px rgba(0,0,0,.45); }
+.tag { position: absolute; left: 50%; transform: translateX(-50%) rotate(-2deg); white-space: nowrap; text-align: center; border: 6px solid var(--ink); border-radius: 30px; padding: 14px 40px 10px; box-shadow: 0 10px 0 var(--ink), 0 22px 40px rgba(0,0,0,.45); }
+.tag b { display: block; font: 400 78px/1 var(--racing); }
+.tag small { display: block; font: 800 40px/1.15 var(--kid); }
+.tag.toddler { background: linear-gradient(160deg, #fff1b8, #ffc93c 60%, #ff8a1f); color: var(--ink); }
+.tag.kids { background: linear-gradient(160deg, #9ad8ff, #2f7bff); color: #fff; }
+.tag.kids b { text-shadow: 4px 4px 0 var(--ink); }
+.rides { position: absolute; left: 36px; right: 36px; top: 500px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px 14px; }
+.ride { background: #fff8e8; border: 6px solid var(--ink); border-radius: 26px; overflow: hidden; box-shadow: 0 8px 0 var(--ink); }
+.ride img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.ride span { display: block; text-align: center; font: 800 27px/1 var(--kid); color: var(--ink); padding: 6px 0 8px; white-space: nowrap; }
+.tiles.eight { top: 470px; gap: 24px; }
+.tiles.eight .tile { height: 292px; }
+.tiles.eight .tile span { font-size: 44px; }
+.card.six div { font-size: 46px; }
 </style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" id="chromeDefs">
   <defs>
@@ -126,7 +149,7 @@ function chromeSvg(lines, { size = 100, width, flares = [], edge = 1 } = {}) {
 
 const P = id => document.getElementById('root').innerHTML = posters[id]();
 const head = (a, fa, b, fb) => `<div class="head">${chromeSvg([{ t: a, fill: fa, fit: .78 }, { t: b, fill: fb, fit: 1 }], { size: 120, width: 760, edge: .7, flares: [[0.72, 0.1, 40]] })}</div>`;
-const frame = (src, extra = '') => `<img class="bg" src="frames/${src}"><div class="rays"></div><div class="streaks"></div><div class="grade"></div>${extra}`;
+const frame = (src, extra = '') => `<img class="bg" src="${src.includes('/') ? src : 'frames/' + src}"><div class="rays"></div><div class="streaks"></div><div class="grade"></div>${extra}`;
 const posters = {
   hero: () => `<div class="poster">${frame('hero-meadow.png', '<div class="flare" style="left:690px;top:520px"></div>')}
     ${head('HOLD', 'red', 'TO GO!', 'silver')}
@@ -163,5 +186,46 @@ const posters = {
     <div class="head">${chromeSvg([{ t: "XANDYR'S", fill: 'red', fit: .82 }, { t: 'TURBO RUSH', fill: 'silver', fit: 1 }], { size: 100, width: 640, edge: .6, flares: [[0.66, 0.1, 34]] })}</div>
     <div class="pill">Hold to go! Ages 2–7</div></div>`,
 };
+
+posters.modes = () => `<div class="poster">
+    <div class="half top"><img src="frames2/split-toddler.png"><div class="grade"></div></div>
+    <div class="half bottom"><img src="frames2/split-kids.png"><div class="grade"></div><div class="streaks"></div></div>
+    <div class="divider"></div>
+    ${head('TODDLERS', 'gold', '& BIG KIDS', 'silver')}
+    <div class="tag toddler" style="top:700px"><b>TODDLERS</b><small>Ages 2–4 · It drives itself!</small></div>
+    <div class="tag kids" style="top:1660px"><b>LITTLE KIDS</b><small>Ages 4–7 · You drive!</small></div></div>`;
+posters.sky = () => `<div class="poster">${frame('frames2/sky-jet.png')}
+    ${head('FLY THE', 'blue', 'SKY!', 'silver')}
+    <div class="pill blue small" style="top:520px">Planes, jets, a helicopter & a UFO!</div>
+    <div class="badge new" style="right:50px;bottom:130px">NEW!</div></div>`;
+posters.water = () => `<div class="poster">${frame('frames2/water-boat.png', '<div class="flare" style="left:700px;top:600px"></div>')}
+    ${head('MAKE A', 'blue', 'SPLASH!', 'silver')}
+    <div class="pill blue" style="top:520px">Speedboats & jet skis!</div>
+    <div class="badge new" style="left:50px;bottom:130px;transform:rotate(-10deg)">NEW!</div></div>`;
+posters.weewoo = () => `<div class="poster">${frame('frames2/toddler-fire.png', '<div class="flare" style="left:330px;top:820px"></div>')}
+    ${head('WEE-WOO!', 'red', 'HONK HONK!', 'silver')}
+    <div class="pill red small" style="top:520px">Every ride has its own horn!</div>
+    <div class="tap" style="right:70px;bottom:300px;transform:rotate(10deg);text-align:center">sirens · air horns<br>foghorns · jingles!</div></div>`;
+posters.rides = () => `<div class="poster">${frame('frames2/sky-plane.png')}
+    ${head('20 AWESOME', 'gold', 'RIDES!', 'silver')}
+    <div class="rides">${[['gt','Sports'],['super','Super'],['muscle','Muscle'],['semi','Semi'],['dump','Dump'],['formula','Formula'],['police','Police'],['fire','Fire'],
+      ['bus','Bus'],['icecream','Ice Cream'],['tractor','Tractor'],['bubble','Bubble'],['plane','Plane'],['heli','Copter'],['jet','Jet'],['ufo','UFO'],
+      ['boat','Boat'],['jetski','Jet Ski'],['rally','Rally'],['truck','Pickup']].map(([k, n]) => `<div class="ride"><img src="frames2/ride-${k}.png"><span>${n}</span></div>`).join('')}</div>
+    <div class="pill small" style="top:auto;bottom:150px">Cars, trucks, planes, boats & a UFO!</div></div>`;
+posters.worlds8 = () => `<div class="poster">${frame('frames2/sky-plane.png')}
+    ${head('8 AMAZING', 'gold', 'WORLDS', 'silver')}
+    <div class="tiles eight">${[['frames/hero-meadow.png','Meadow'],['frames/desert-side.png','Desert'],['frames/snow-bonk.png','Snow'],['frames/beach-aerial.png','Beach'],
+      ['frames/city-low.png','City'],['frames/space-turbo.png','Space'],['frames2/sky-jet.png','Sky Zone'],['frames2/water-boat.png','Water Zone']]
+      .map(([f, n]) => `<div class="tile"><img src="${f}"><span>${n}</span></div>`).join('')}</div></div>`;
+posters.parents2 = () => `<div class="poster">${frame('frames2/toddler-bus.png')}
+    ${head('MADE FOR', 'red', 'LITTLE DRIVERS', 'silver')}
+    <div class="card six">
+      <div>Toddler mode drives itself</div><div>No ads, ever</div><div>No data collected</div><div>Works offline</div>
+      <div>Grown-ups-only purchases</div><div class="trial">Try everything free for 24 hours</div>
+    </div></div>`;
+posters.feature2 = () => `<div class="poster wide"><img class="bg" src="frames2/feature-sky.png"><div class="streaks"></div><div class="grade"></div>
+    <div class="head">${chromeSvg([{ t: "XANDYR'S", fill: 'red', fit: .82 }, { t: 'TURBO RUSH', fill: 'silver', fit: 1 }], { size: 100, width: 640, edge: .6, flares: [[0.66, 0.1, 34]] })}</div>
+    <div class="pill" style="left:290px">Cars, trucks, planes & boats!</div></div>`;
+
 P(location.hash.slice(1));
 </script></body></html>

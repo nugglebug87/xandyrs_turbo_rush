@@ -75,10 +75,15 @@ subscription billed through Google Play; cancel any time in Google Play under Pa
 |---|---|
 | App icon (512×512) | `icon-512.png` |
 | Feature graphic (1024×500) | `feature-graphic.png` |
-| Phone screenshots (1080×1920), in this order | `screenshots/1-hold-to-go.png`, `2-turbo-blast.png`, `3-bonk-rockets.png`, `4-six-worlds.png`, `5-dream-car.png`, `6-honk-honk.png`, `7-made-for-kids.png` |
+| Phone screenshots (1080×1920), in this order | `screenshots/1-toddlers-and-kids.png`, `2-fly-the-sky.png`, `3-make-a-splash.png`, `4-wee-woo.png`, `5-bonk-rockets.png`, `6-twenty-rides.png`, `7-eight-worlds.png`, `8-made-for-kids.png` |
 
-The first three screenshots are what most people see in search results, so they lead with the
-simplest, most exciting moments: holding to go, turbo, and rockets.
+The first three screenshots are what most people see in search results, so they lead with the two ways
+to play (toddlers and little kids) and the two new zones (sky and water).
 
-To regenerate the art after changing the game, see `promo/`: `node promo/render.js app/src/main/assets/game`
-renders the 3D frames into `promo/frames/`, then `node promo/compose.js store` builds the posters.
+To regenerate the art after changing the game (from the repository root):
+
+```sh
+node store/promo/render.js app/src/main/assets/game    # older frames: meadow, desert, snow, beach, city, space, rockets
+node store/promo/render2.js app/src/main/assets/game   # v1.1 frames: toddler vehicles, sky, water, all 20 rides
+node store/promo/compose2.js store                     # builds store/screenshots and store/feature-graphic.png
+```
