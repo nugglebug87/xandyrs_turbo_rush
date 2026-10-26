@@ -92,7 +92,12 @@ class BillingManager(context: Context, private val onChange: () -> Unit) : Purch
         if (!client.isReady) return start()
         val params = QueryPurchasesParams.newBuilder().setProductType(ProductType.SUBS).build()
         client.queryPurchasesAsync(params) { result, purchases ->
-            if (result.responseCode == BillingResponseCode.OK) subscribed = handle(purchases)
+            if (result.responseCode == BillingResponseCode.OK) {
+                subscribed = handle(purchases)
+            } else {
+                // Fail closed when a purchase refresh cannot confirm entitlement.
+                subscribed = false
+            }
             onChange()
         }
     }
@@ -118,7 +123,7 @@ class BillingManager(context: Context, private val onChange: () -> Unit) : Purch
         when (result.responseCode) {
             BillingResponseCode.OK -> if (purchases != null && handle(purchases)) subscribed = true
             BillingResponseCode.ITEM_ALREADY_OWNED -> return refreshPurchases()
-            else -> Unit // Cancelled or failed: nothing changes.
+            else -> Unit // Cancelled or failed: keep current entitlement until next refresh.
         }
         onChange()
     }
