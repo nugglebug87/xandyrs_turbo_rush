@@ -26,7 +26,7 @@ def check():
     require("8 worlds" in listing, "Store listing must describe eight worlds")
     require("does not start a subscription" in readme,
             "README must distinguish preview from Play subscription")
-    require(bool(re.search(r"versionCode\\s*=\\s*2", gradle)),
+    require("versionCode = 2" in gradle,
             "Expected versionCode 2; update release checklist for a new version")
     require("6 worlds" not in listing.lower(), "Outdated six-world wording")
     for error in errors:
