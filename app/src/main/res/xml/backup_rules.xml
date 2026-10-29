@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Back up the trial start time so reinstalling doesn't restart the free trial. -->
 <full-backup-content>
-    <include domain="sharedpref" path="turbo_pass.xml" />
+    <exclude domain="sharedpref" path="turbo_pass.xml" />
 </full-backup-content>

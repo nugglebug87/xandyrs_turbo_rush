@@ -467,7 +467,7 @@ button:focus-visible { outline: 3px solid var(--hot); outline-offset: 2px; }
       </ul>
     </div>
     <div class="price" id="payPrice"></div>
-    <p class="fine" id="payFine">Billed through Google Play. Cancel any time in Google Play subscriptions.</p>
+    <p class="fine" id="payFine">Paid subscription billed through Google Play. Confirm the price and renewal period in Google Play before buying. Cancel any time in Google Play subscriptions.</p>
     <div class="gate" id="gate" hidden>
       <p>Grown-ups only</p>
       <div class="q" id="gateQ"></div>
@@ -2432,12 +2432,12 @@ function toMenu() {
 $('startBtn').addEventListener('click', startRace);
 
 // ---------- Turbo Pass ----------
-// Only the Android app provides window.XandyrApp (Google Play Billing + the 24-hour trial clock).
+// Only the Android app provides window.XandyrApp (Google Play Billing).
 // Without it (web version) everything stays unlocked.
 const bridge = window.XandyrApp || null;
 const FREE = { track: 'meadow', style: 'gt', paint: '#ffc93c' };
-const pass = { app: !!bridge, subscribed: false, trialEndsAt: 0, price: '', billingReady: false };
-const locked = () => pass.app && !pass.subscribed && Date.now() >= pass.trialEndsAt;
+const pass = { app: !!bridge, subscribed: false, price: '', billingReady: false };
+const locked = () => pass.app && !pass.subscribed;
 const freeTrack = k => !locked() || k === FREE.track;
 const freeStyle = k => !locked() || k === FREE.style || k === 'bubble';
 const freePaint = c => !locked() || c === FREE.paint;
@@ -2459,7 +2459,7 @@ let wasLocked = null;
 function applyPass() {
   const lock = locked();
   if (lock && (save.track !== FREE.track || save.pick['kids-road'] !== FREE.style || save.pick['toddler-road'] !== 'bubble' || save.carColor !== FREE.paint)) {
-    // Trial over: fall back to the free track and car (choices come back after subscribing).
+    // Without Turbo Pass, fall back to free choices (premium choices return after subscribing).
     save.track = FREE.track; save.carStyle = save.pick['kids-road'] = FREE.style; save.pick['toddler-road'] = 'bubble'; save.carColor = FREE.paint; persist();
     if (state === 'menu' && player) newRace();
   }
@@ -2467,18 +2467,13 @@ function applyPass() {
   wasLocked = lock;
   updatePassBar();
 }
-function fmtLeft(ms) {
-  const m = Math.max(0, Math.ceil(ms / 60000)), h = Math.floor(m / 60);
-  return h ? `${h}h ${m % 60}m` : `${m}m`;
-}
 function updatePassBar() {
   const bar = isToddler() ? $('tPassBar') : $('passBar');
   $('passBar').hidden = $('tPassBar').hidden = true;
   bar.hidden = !pass.app;
   if (!pass.app) return;
   if (pass.subscribed) bar.innerHTML = '<span>Turbo Pass is on. Everything is unlocked!</span>';
-  else if (!locked()) bar.innerHTML = `<span>Free trial: <b>${fmtLeft(pass.trialEndsAt - Date.now())}</b> left</span><button type="button" data-pay>TURBO PASS</button>`;
-  else bar.innerHTML = '<span>Free trial is over</span><button type="button" data-pay>UNLOCK ALL</button>';
+  else bar.innerHTML = '<span>Meadow and starter vehicles are free. Turbo Pass unlocks more.</span><button type="button" data-pay>SEE TURBO PASS</button>';
   bar.querySelector('[data-pay]')?.addEventListener('click', openPaywall);
 }
 $('payLogo').innerHTML = chromeSvg([{ t: 'TURBO PASS', fill: 'red', fit: 1 }], { size: 100, width: 600, edge: 0.6, flares: [[0.7, 0.15, 26]] });

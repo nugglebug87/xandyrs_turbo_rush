@@ -20,11 +20,13 @@ def check():
     require('PRODUCT_ID = "turbo_pass"' in billing, "Subscription ID mismatch")
     require('it.offerId == null' in billing and '?: offers.firstOrNull()' not in billing,
             "Purchase flow must not fall back to promotional offers")
-    require("24 hours" in listing and "does not automatically enroll" in listing,
-            "Store listing must disclose app-managed free access")
+    require("auto-renewing paid subscription" in listing, "Store listing must describe paid subscription")
     require("8 worlds" in listing, "Store listing must describe eight worlds")
-    require("does not start a subscription" in readme,
-            "README must distinguish preview from Play subscription")
+    require("without trial offers" in readme, "README must describe paid base plan")
+    activity = read("app/src/main/java/com/xandyr/turborush/MainActivity.kt")
+    game = read("app/src/main/assets/game/index.html")
+    require("trialEndsAt" not in activity and "TRIAL_MS" not in activity, "Remove native trial entitlement")
+    require("trialEndsAt" not in game and "Free trial" not in game, "Remove game trial countdown")
     require("versionCode = 2" in gradle,
             "Expected versionCode 2; update release checklist for a new version")
     require("through 6 worlds" not in listing.lower(), "Outdated six-world wording")

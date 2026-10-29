@@ -53,9 +53,7 @@ MADE FOR KIDS AND PARENTS
 • Grown-ups-only question before any purchase
 
 TURBO PASS
-Enjoy 24 hours of full access with no payment information or subscription required. This is an app-managed preview, not a Google Play subscription free trial, and does not automatically enroll you or charge you. After that, the Meadow track, the yellow sports car and the toddler bubble
-car stay free forever. Turbo Pass unlocks the Sky Zone, the Water Zone, all other worlds, rockets and turbo,
-and every vehicle and color. Turbo Pass is an auto-renewing subscription billed through Google Play only if a parent chooses to purchase it. The price and renewal period appear before purchase; cancel any time in Google Play under Payments & subscriptions.
+The Meadow track, yellow sports car and toddler bubble car are free. Turbo Pass unlocks Sky Zone, Water Zone, the other worlds, rockets, turbo, and the extra vehicles and colors. Turbo Pass is an auto-renewing paid subscription through Google Play. The localized price and renewal period appear before purchase; cancel any time in Google Play under Payments & subscriptions.
 
 ## Category and tags
 
@@ -74,12 +72,11 @@ and every vehicle and color. Turbo Pass is an auto-renewing subscription billed 
 |---|---|
 | App icon (512×512) | `icon-512.png` |
 | Feature graphic (1024×500) | `feature-graphic.png` |
-| Phone screenshots (1080×1920), in this order | `screenshots/1-hold-to-go.png`, `2-turbo-blast.png`, `3-bonk-rockets.png`, `4-six-worlds.png` (outdated six-world headline; replace before submission), `5-dream-car.png`, `6-honk-honk.png`, `7-made-for-kids.png` |
+| Phone screenshots (1080×1920), in this order | `screenshots/1-toddlers-and-kids.png`, `screenshots/2-fly-the-sky.png`, `screenshots/3-make-a-splash.png`, `screenshots/4-wee-woo.png`, `screenshots/5-bonk-rockets.png`, `screenshots/6-twenty-rides.png`, `screenshots/7-eight-worlds.png`, `screenshots/8-made-for-kids.png` |
 
-Premium features (Turbo and rockets) shown in screenshots require Turbo Pass after the 24-hour preview. Replace the outdated six-world screenshot with an eight-environment image and visually verify all art against version 1.1 before upload.
+Premium features (Turbo and rockets) shown in screenshots require Turbo Pass. Visually verify all art against the final build before upload.
 
-The first three screenshots are what most people see in search results, so they lead with the
-simplest, most exciting moments: holding to go, turbo, and rockets.
+The first three screenshots highlight toddler mode, Sky Zone and Water Zone.
 
 To regenerate the art after changing the game, see `promo/`: `node promo/render.js app/src/main/assets/game`
 renders the 3D frames into `promo/frames/`, then `node promo/compose.js store` builds the posters.

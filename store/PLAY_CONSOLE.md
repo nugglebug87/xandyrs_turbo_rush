@@ -63,15 +63,14 @@ Then **Add base plan**:
 | Grace period | 7 days (default is fine) |
 | Price | Your choice, e.g. $2.99. Play converts it for other countries |
 
-**Activate** the base plan. **Don't add an offer or free trial**: the app provides a 24-hour free-access preview without enrolling users in a subscription
-(Play's own trials must be at least 3 days).
+**Activate** the base plan. **Do not add an offer or free trial**: Turbo Pass is a paid subscription from the start.
 
 ## 5. License testing (free test purchases)
 
 *Setup (Settings) > License testing*: add your Google account. Purchases from it are free and renew every few
 minutes, so you can watch the subscription renew and then end.
 
-On your phone, try: the free trial bar, buying Turbo Pass (answer the math question, then Google Play opens),
+On your phone, try: the free content and Turbo Pass bar, buying Turbo Pass (answer the math question, then Google Play opens),
 **Restore**, and cancelling in Google Play.
 
 ## 6. App content (*Policy and programs > App content*)
@@ -84,7 +83,7 @@ On your phone, try: the free trial bar, buying Turbo Pass (answer the math quest
 **No**, my app does not contain ads.
 
 ### App access
-**All functionality is available without any special access.** (No login. Reviewers get the 24-hour trial.)
+**All functionality is available without any special access.** (No login. Meadow and starter vehicles are free.)
 
 ### Content rating (IARC questionnaire)
 - Email: nugglebug87@gmail.com
@@ -140,7 +139,7 @@ Expect a rating like *Everyone* (ESRB) / *PEGI 3* or *PEGI 7*.
 - Verify the final merged manifest, bundled SDKs, network requests, and Data Safety answers; do not assume that billing means no data handling.
 - Validate the parent gate on actual child-facing devices and ensure a guardian can see the localized price and renewal period before purchase.
 - Confirm release signing, the actual bundled game asset, versionCode 2, and current Play Console target API requirements.
-- Treat the app-managed 24-hour preview as device-clock-dependent; test clock changes, clearing storage, and backup restore.
+- Verify that no trial or introductory offer remains active for `turbo_pass` in Play Console.
 - Do not submit to production until subscription lifecycle tests and privacy verification pass.
 
 ## 9. Release to production

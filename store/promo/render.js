@@ -3,7 +3,7 @@ const { chromium } = require('/opt/node-tools/node_modules/playwright');
 const path = require('path');
 const game = process.argv[2], out = path.join(__dirname, 'frames');
 require('fs').mkdirSync(out, { recursive: true });
-const subscribed = () => { window.XandyrApp = { getEntitlement: () => JSON.stringify({ subscribed: true, trialEndsAt: 0, price: '', billingReady: true }), subscribe() {}, restore() {} }; };
+const subscribed = () => { window.XandyrApp = { getEntitlement: () => JSON.stringify({ subscribed: true, price: '', billingReady: true }), subscribe() {}, restore() {} }; };
 async function open(b, w, h) {
   const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
   p.errs = []; p.on('pageerror', e => p.errs.push(e.message));

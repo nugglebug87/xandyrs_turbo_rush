@@ -15,11 +15,11 @@ The game does not request personal details or send gameplay analytics to the dev
 - no chat, camera, microphone, location or contacts access
 - no links out of the app to websites or social media
 
-Game progress (level, coins, upgrades, and vehicle choices) is saved locally in WebView storage. The time the 24-hour free-access preview began is saved in app preferences. Android backup is configured to include the preview timestamp; game progress is not explicitly included in the configured backup rules. Backup or transfer may be handled by Android and Google depending on device settings. The developer does not operate a gameplay-data server.
+Game progress (level, coins, upgrades, and vehicle choices) is saved locally in WebView storage. Game progress is not explicitly included in the configured backup rules. Backup or transfer may be handled by Android and Google depending on device settings. The developer does not operate a gameplay-data server.
 
 ## Purchases
 
-The optional **Turbo Pass** subscription is purchased through **Google Play**. Google processes payment information; the app receives purchase state and purchase tokens through the Google Play Billing library to manage access. The 24-hour free-access preview is app-managed and does not automatically begin a paid subscription. We never receive payment details, names or
+The optional **Turbo Pass** subscription is purchased through **Google Play**. Google processes payment information; the app receives purchase state and purchase tokens through the Google Play Billing library to manage access. We never receive payment details, names or
 email addresses. Before Google Play's purchase screen opens, the app asks a grown-ups-only math question.
 
 Google's handling of purchase information is covered by the

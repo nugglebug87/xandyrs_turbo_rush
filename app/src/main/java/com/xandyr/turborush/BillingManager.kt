@@ -19,8 +19,7 @@ import com.android.billingclient.api.QueryPurchasesParams
 /**
  * Google Play Billing for the "Turbo Pass" subscription.
  *
- * The 24-hour free-access preview is handled by the app (see MainActivity).
- * It does not enroll the user in a Google Play subscription. Configure a paid base plan.
+ * Premium access requires an active Google Play subscription. Select the paid base plan.
  */
 class BillingManager(context: Context, private val onChange: () -> Unit) : PurchasesUpdatedListener {
 

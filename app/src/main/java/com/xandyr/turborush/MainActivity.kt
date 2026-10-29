@@ -7,7 +7,6 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -18,8 +17,6 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        /** The free trial starts the first time the app is opened. */
-        const val TRIAL_MS = 24L * 60 * 60 * 1000
         private const val GAME_HOST = "appassets.androidplatform.net"
         private const val GAME_URL = "https://$GAME_HOST/assets/game/index.html"
     }
@@ -27,17 +24,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var billing: BillingManager
         private set
     private lateinit var web: WebView
-    private val prefs by lazy { getSharedPreferences("turbo_pass", MODE_PRIVATE) }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         goFullScreen()
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-
-        if (!prefs.contains("first_open")) {
-            prefs.edit { putLong("first_open", System.currentTimeMillis()) }
-        }
 
         // Billing first: the game asks for the entitlement as soon as it loads.
         billing = BillingManager(this) { pushEntitlement() }
@@ -87,10 +79,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun entitlementJson(): String {
-        val firstOpen = prefs.getLong("first_open", System.currentTimeMillis())
         return JSONObject()
             .put("subscribed", billing.subscribed)
-            .put("trialEndsAt", firstOpen + TRIAL_MS)
             .put("price", billing.price)
             .put("billingReady", billing.ready)
             .toString()
