@@ -6,7 +6,7 @@ This branch corrects listing counts, the removal of app-managed preview access, 
 - [x] No app-managed trial in gameplay or Android entitlement; paid base plan selection only.
 - [x] Listing, privacy text, release instructions and promotional source updated for no trial.
 - [x] Eight screenshots and feature graphic regenerated from the updated source with creator credit.
-- [x] Static checks and Android debug build/unit test task passed in GitHub Actions run 43652807897.
+- [x] Static checks and Android debug build, unit test task and unsigned release bundle passed in GitHub Actions run 43653969955.
 - [x] PR conflict with current `main` resolved.
 
 ## Blocking verification
@@ -21,4 +21,4 @@ This branch corrects listing counts, the removal of app-managed preview access, 
 - [ ] Check asset sync from `web/turbo-rush.html` to `app/src/main/assets/game/index.html`; test toddler, Sky and Water modes in the signed build.
 - [ ] Verify release signing, versionCode 2, Play Console configuration, and closed-testing requirements.
 
-The CI debug build and unit test task passed. A signed release build and Play-installed device tests have not been verified.
+The CI debug build, unit test task and unsigned release bundle passed. Release signing and Play-installed device tests have not been verified.
