@@ -1,7 +1,7 @@
 # Xandyr's Turbo Rush (Android)
 
 A vehicle racing game for little kids ages 2-7: a 3D racer packaged as an Android app with a
-Google Play subscription called **Turbo Pass** and a **24-hour free trial**.
+Google Play subscription called **Turbo Pass**.
 
 The game is a single HTML page (three.js) bundled in `app/src/main/assets/game/` and shown full screen in a
 WebView. The game is fully offline: no ads, no analytics, no web requests. (The Google Play Billing library
@@ -20,7 +20,7 @@ The game opens on a **"Who's driving?"** screen:
 
 Every vehicle has its own horn (sirens, air horns, a bulb horn, a foghorn, an ice cream jingle, a UFO warble...).
 
-| | Free (after the trial) | With the trial or Turbo Pass |
+| | Free | With Turbo Pass |
 |---|---|---|
 | Tracks | Meadow | Meadow, Desert, Snow, Beach, City, Space, **Sky Zone**, **Water Zone** |
 | Sky Zone | No | Plane, Helicopter, Jet, UFO on a rainbow sky road |
@@ -30,33 +30,24 @@ Every vehicle has its own horn (sirens, air horns, a bulb horn, a foghorn, an ic
 | Paint | Yellow | All 10 colors |
 | Levels, coins, upgrades, honk | Yes | Yes |
 
-When the trial ends, locked items show a padlock. Tapping one opens the Turbo Pass screen. Buying goes
+For premium choices, locked items show a padlock. Tapping one opens the Turbo Pass screen. Buying goes
 through a **grown-ups-only times-table question** first, then Google Play's own purchase sheet.
 
-## How the 24-hour trial works
+## Subscription access
 
-Google Play only allows free-trial offers of **3 days or longer**, so a 24-hour trial can't be set up
-in Play Console. The app runs the trial itself instead:
-
-- The trial starts the first time the app is opened (`first_open` in `SharedPreferences`, file `turbo_pass`).
-- That value is included in Android backup, so uninstalling and reinstalling doesn't restart the trial on the
-  same Google account.
-- Clearing the app's storage in Settings would restart it. For a stricter trial you'd need a server that
-  remembers each account.
-
-So in Play Console the subscription should have **no free-trial offer**, just a paid base plan.
+The free Meadow track and starter vehicles are available without a purchase. Turbo Pass unlocks the other worlds, vehicles, colors, rockets and turbo while Google Play reports an active subscription. Configure the `turbo_pass` paid base plan without trial offers.
 
 ## Code map
 
 | File | What it does |
 |---|---|
-| `MainActivity.kt` | Full-screen WebView, loads the game from assets, keeps the trial clock, talks to the game |
+| `MainActivity.kt` | Full-screen WebView, loads the game from assets, talks to the game |
 | `BillingManager.kt` | Google Play Billing 9: product lookup, purchase sheet, acknowledging, restoring, renewals |
 | `GameBridge.kt` | `window.XandyrApp` in JavaScript: `getEntitlement()`, `subscribe()`, `restore()` |
 | `assets/game/index.html` | The game. It locks content only when `window.XandyrApp` exists |
 | `scripts/sync-game.sh` | Copies a new version of the game page into the app and strips internet links |
 
-The game asks `XandyrApp.getEntitlement()` for `{ subscribed, trialEndsAt, price, billingReady }`, and the
+The game asks `XandyrApp.getEntitlement()` for `{ subscribed, price, billingReady }`, and the
 app pushes changes back by calling `window.onEntitlement(json)`.
 
 ## Set up Google Play (one time)
@@ -70,11 +61,11 @@ app pushes changes back by calling `window.onEntitlement(json)`.
    - Product ID: **`turbo_pass`** (must match `BillingManager.PRODUCT_ID`)
    - Name: Turbo Pass
    - Add a **base plan**, auto-renewing, monthly (or weekly or yearly). Set the price, e.g. $2.99.
-   - **Don't add a free-trial offer**; the app gives the 24-hour trial.
+   - **Don't add a free-trial offer**; the app has no trial.
    - Activate the base plan.
 5. **Test buyers**: *Settings > License testing*, add your Google account. Test purchases from those accounts
    are free and renew every few minutes, so you can watch a renewal and an expiry quickly.
-6. Install the app from the internal testing link on your phone and try the trial, the Turbo Pass screen,
+6. Install the app from the internal testing link on your phone and try the free content, the Turbo Pass screen,
    buying, cancelling and *Restore*.
 
 ### Kids' app rules (Google Play Families policy)
@@ -83,12 +74,9 @@ Because the game is made for young children, Play Console will ask about it:
 
 - **Target audience and content**: choose the age groups (e.g. 5 and under, 6–8). This puts the app under
   the Families policy.
-- **Privacy policy URL**: required for kids' apps even if you collect nothing. Say that the app collects no
-  personal data, has no ads or analytics, and that purchases are handled by Google Play.
-- **Data safety form**: the app itself collects and shares no data. Google Play Billing handles payments.
-- **Purchases**: Families policy asks that in-app purchases are aimed at the parent. The app does this with
-  the grown-ups question before Google Play opens, and Google Play also asks for the account password or
-  family approval.
+- **Privacy policy URL**: explain local game progress, no ads or gameplay analytics, and Google Play purchase handling.
+- **Data safety form**: inspect the final AAB, SDK declarations and traffic before answering. Billing receives purchase state and tokens.
+- **Purchases**: Families policy asks that in-app purchases are aimed at the parent. The app uses a math question before Google Play opens; review whether this is a sufficient parent gate under current Families policy. Google Play account authentication varies by configuration.
 - **Content rating questionnaire**: cartoon racing, rockets that make cars spin out (no damage or injury).
 
 ## Build
@@ -101,7 +89,7 @@ Needs JDK 17+ and the Android SDK (Android Studio installs both). Open the folde
 ```
 
 Billing only works in a build installed **from Google Play** (internal testing is fine). A sideloaded debug
-APK runs the game and the trial, but the Turbo Pass screen will say Google Play isn't ready.
+APK runs the free game, but the Turbo Pass screen will say Google Play isn't ready.
 
 ### Signing the release
 

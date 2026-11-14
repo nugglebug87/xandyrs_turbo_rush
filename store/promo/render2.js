@@ -1,6 +1,6 @@
 // Renders raw frames for the v1.1 store posters from the app's bundled game (offline fonts).
 // Usage: node render2.js <app/src/main/assets/game> [only-prefix]
-const { chromium } = require('/opt/node-tools/node_modules/playwright');
+const { chromium } = require('playwright');
 const path = require('path');
 const game = process.argv[2], only = process.argv[3], out = path.join(__dirname, 'frames2');
 require('fs').mkdirSync(out, { recursive: true });
@@ -10,7 +10,7 @@ async function open(b, w, h, save) {
   p.errs = []; p.on('pageerror', e => p.errs.push(e.message));
   await p.addInitScript(save => {
     localStorage.setItem('hairpin-rush-v1', JSON.stringify(save));
-    window.XandyrApp = { getEntitlement: () => JSON.stringify({ subscribed: true, trialEndsAt: 0, price: '', billingReady: true }), subscribe() {}, restore() {} };
+    window.XandyrApp = { getEntitlement: () => JSON.stringify({ subscribed: true, price: '', billingReady: true }), subscribe() {}, restore() {} };
   }, save);
   await p.route('**/*', r => {
     const u = new URL(r.request().url());
@@ -77,7 +77,7 @@ const RIDES = [
   ['toddler', 'sky', 'jet'], ['toddler', 'sky', 'ufo'], ['toddler', 'water', 'boat'], ['toddler', 'water', 'jetski'],
 ];
 (async () => {
-  const b = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+  const b = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   for (const [file, w, h, mode, track, style, color, o] of SHOTS) {
     if (only && !file.startsWith(only)) continue;
     const p = await open(b, w, h, saveFor(mode, track, style, color));

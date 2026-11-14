@@ -6,7 +6,7 @@ answers to paste or pick. Store text and images are in [`LISTING.md`](LISTING.md
 You'll need:
 
 - `app-release.aab`, the signed release build
-- `upload-key.jks` and `upload-key.txt`, the upload key and its passwords. Keep these somewhere safe, like a
+- `upload.jks` and `keystore.properties`, the upload key and its passwords. Keep these somewhere safe, like a
   password manager. **Never put them in GitHub.**
 
 ## 1. Create your developer account (one time)
@@ -37,9 +37,9 @@ You'll need:
 *Test and release > Testing > Internal testing > Create new release*
 
 1. When asked about app signing, choose **Use Google-generated key** (Play App Signing). Your file
-   `upload-key.jks` is the *upload* key, so if it's ever lost, Google support can reset it.
+   `upload.jks` is the *upload* key, so if it's ever lost, Google support can reset it.
 2. Upload `app-release.aab`.
-3. Release name: `1.0 (1)`. Release notes: `First release.`
+3. Release name: `1.1 (2)`. Release notes: `Toddler mode, Sky and Water zones, new vehicles and horns.`
 4. *Testers* tab: create an email list with your own Google account (and anyone helping test).
 5. Save, review, and **Start rollout to Internal testing**. Open the opt-in link on your phone to install.
 
@@ -51,7 +51,7 @@ You'll need:
 |---|---|
 | Product ID | `turbo_pass` (must be exactly this) |
 | Name | Turbo Pass |
-| Benefits (up to 4) | All 6 race tracks · Rockets and Turbo boost · All 6 car shapes and 10 colors |
+| Benefits (up to 4) | All 8 environments · Rockets and Turbo boost · Extra vehicles and 10 colors |
 
 Then **Add base plan**:
 
@@ -63,15 +63,14 @@ Then **Add base plan**:
 | Grace period | 7 days (default is fine) |
 | Price | Your choice, e.g. $2.99. Play converts it for other countries |
 
-**Activate** the base plan. **Don't add an offer or free trial**: the app gives the 24-hour trial itself
-(Play's own trials must be at least 3 days).
+**Activate** the base plan. **Do not add an offer or free trial**: Turbo Pass is a paid subscription from the start.
 
 ## 5. License testing (free test purchases)
 
 *Setup (Settings) > License testing*: add your Google account. Purchases from it are free and renew every few
 minutes, so you can watch the subscription renew and then end.
 
-On your phone, try: the free trial bar, buying Turbo Pass (answer the math question, then Google Play opens),
+On your phone, try: the free content and Turbo Pass bar, buying Turbo Pass (answer the math question, then Google Play opens),
 **Restore**, and cancelling in Google Play.
 
 ## 6. App content (*Policy and programs > App content*)
@@ -84,7 +83,7 @@ On your phone, try: the free trial bar, buying Turbo Pass (answer the math quest
 **No**, my app does not contain ads.
 
 ### App access
-**All functionality is available without any special access.** (No login. Reviewers get the 24-hour trial.)
+**All functionality is available without any special access.** (No login. Meadow and starter vehicles are free.)
 
 ### Content rating (IARC questionnaire)
 - Email: nugglebug87@gmail.com
@@ -105,11 +104,8 @@ Expect a rating like *Everyone* (ESRB) / *PEGI 3* or *PEGI 7*.
 - Teacher Approved: optional; you can skip it.
 
 ### Data safety
-- Does your app collect or share any of the required user data types? **No**
-  (Game progress stays on the device; payments are handled by Google Play, not by the app.)
-- Is all of the user data collected by your app encrypted in transit? Not applicable when nothing is collected.
-- Do you provide a way for users to request that their data is deleted? Not applicable: no data or accounts.
-  Uninstalling the app removes everything.
+- Inspect the final AAB manifest, SDK declarations, and actual traffic before answering whether the app collects or shares data. Billing receives purchase tokens and state; do not infer a **No** answer merely from the absence of gameplay analytics.
+- Answer encryption and deletion questions from the same verified build and Google Play's current form. Local progress may be subject to Android backup or transfer settings.
 
 ### Other declarations
 | Declaration | Answer |
@@ -132,6 +128,16 @@ Expect a rating like *Everyone* (ESRB) / *PEGI 3* or *PEGI 7*.
 
 - *Grow users > Store presence > Main store listing*: paste from [`LISTING.md`](LISTING.md) and upload the images.
 - *Test and release > Production > Countries/regions*: pick where to sell (e.g. United States).
+
+## Pre-submission verification gates
+
+- Confirm the Play listing and screenshots show eight environments and clearly distinguish premium features.
+- Test purchase, restore, expiration, cancellation, grace period, account hold, refund and pending purchase behavior using a Play-installed build.
+- Verify the final merged manifest, bundled SDKs, network requests, and Data Safety answers; do not assume that billing means no data handling.
+- Validate the parent gate on actual child-facing devices and ensure a guardian can see the localized price and renewal period before purchase.
+- Confirm release signing, the actual bundled game asset, versionCode 2, and current Play Console target API requirements.
+- Verify that no trial or introductory offer remains active for `turbo_pass` in Play Console.
+- Do not submit to production until subscription lifecycle tests and privacy verification pass.
 
 ## 9. Release to production
 

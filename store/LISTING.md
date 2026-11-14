@@ -8,7 +8,7 @@ Xandyr's Turbo Rush
 
 ## Short description (max 80 characters)
 
-Hold to go! Race cars, honk, turbo and zoom through 6 worlds. For kids ages 2-7.
+Hold to go! Race cars, honk, turbo and zoom through 8 worlds. For kids ages 2-7.
 
 ## Full description (max 4000 characters)
 
@@ -32,7 +32,7 @@ SKY ZONE AND WATER ZONE
 • Fly a plane, helicopter, jet or UFO along a rainbow road through the clouds
 • Race speedboats and jet skis down a river past lighthouses
 
-SIX MORE WORLDS TO EXPLORE
+SIX CLASSIC WORLDS TO EXPLORE
 • Meadow with pine trees
 • Desert with cactus and rocks
 • Snow with snowmen and falling snowflakes
@@ -48,15 +48,12 @@ BUILD YOUR DREAM CAR
 
 MADE FOR KIDS AND PARENTS
 • No ads
-• No accounts, no chat and no data collection
+• No accounts, chat, ads or gameplay analytics
 • Works offline, great for car rides
 • Grown-ups-only question before any purchase
 
 TURBO PASS
-Try everything free for 24 hours. After that, the Meadow track, the yellow sports car and the toddler bubble
-car stay free forever. Turbo Pass unlocks the Sky Zone, the Water Zone, all other worlds, rockets and turbo,
-and every vehicle and color. It's an auto-renewing
-subscription billed through Google Play; cancel any time in Google Play under Payments & subscriptions.
+The Meadow track, yellow sports car and toddler bubble car are free. Turbo Pass unlocks Sky Zone, Water Zone, the other worlds, rockets, turbo, and the extra vehicles and colors. Turbo Pass is an auto-renewing paid subscription through Google Play. The localized price and renewal period appear before purchase; cancel any time in Google Play under Payments & subscriptions.
 
 ## Category and tags
 
@@ -75,10 +72,11 @@ subscription billed through Google Play; cancel any time in Google Play under Pa
 |---|---|
 | App icon (512×512) | `icon-512.png` |
 | Feature graphic (1024×500) | `feature-graphic.png` |
-| Phone screenshots (1080×1920), in this order | `screenshots/1-toddlers-and-kids.png`, `2-fly-the-sky.png`, `3-make-a-splash.png`, `4-wee-woo.png`, `5-bonk-rockets.png`, `6-twenty-rides.png`, `7-eight-worlds.png`, `8-made-for-kids.png` |
+| Phone screenshots (1080×1920), in this order | `screenshots/1-toddlers-and-kids.png`, `screenshots/2-fly-the-sky.png`, `screenshots/3-make-a-splash.png`, `screenshots/4-wee-woo.png`, `screenshots/5-bonk-rockets.png`, `screenshots/6-twenty-rides.png`, `screenshots/7-eight-worlds.png`, `screenshots/8-made-for-kids.png` |
 
-The first three screenshots are what most people see in search results, so they lead with the two ways
-to play (toddlers and little kids) and the two new zones (sky and water).
+Premium features (Turbo and rockets) shown in screenshots require Turbo Pass. Visually verify all art against the final build before upload.
+
+The first three screenshots highlight toddler mode, Sky Zone and Water Zone.
 
 To regenerate the art after changing the game (from the repository root):
 
