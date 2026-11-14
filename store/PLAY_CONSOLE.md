@@ -37,7 +37,7 @@ You'll need:
 *Test and release > Testing > Internal testing > Create new release*
 
 1. When asked about app signing, choose **Use Google-generated key** (Play App Signing). Your file
-   `upload-key.jks` is the *upload* key, so if it's ever lost, Google support can reset it.
+   `upload.jks` is the *upload* key, so if it's ever lost, Google support can reset it.
 2. Upload `app-release.aab`.
 3. Release name: `1.1 (2)`. Release notes: `Toddler mode, Sky and Water zones, new vehicles and horns.`
 4. *Testers* tab: create an email list with your own Google account (and anyone helping test).
@@ -104,11 +104,8 @@ Expect a rating like *Everyone* (ESRB) / *PEGI 3* or *PEGI 7*.
 - Teacher Approved: optional; you can skip it.
 
 ### Data safety
-- Does your app collect or share any of the required user data types? **No**
-  (Game progress stays on the device; payments are handled by Google Play, not by the app.)
-- Is all of the user data collected by your app encrypted in transit? Not applicable when nothing is collected.
-- Do you provide a way for users to request that their data is deleted? Not applicable: no data or accounts.
-  Uninstalling removes local data, subject to Android backup/restore settings.
+- Inspect the final AAB manifest, SDK declarations, and actual traffic before answering whether the app collects or shares data. Billing receives purchase tokens and state; do not infer a **No** answer merely from the absence of gameplay analytics.
+- Answer encryption and deletion questions from the same verified build and Google Play's current form. Local progress may be subject to Android backup or transfer settings.
 
 ### Other declarations
 | Declaration | Answer |

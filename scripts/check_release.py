@@ -31,6 +31,15 @@ def check():
             "Expected versionCode 2; update release checklist for a new version")
     require("through 6 worlds" not in listing.lower(), "Outdated six-world wording")
     require("4-six-worlds.png" not in listing, "Replace outdated six-world screenshot reference")
+    poster = read("store/promo/poster2.html")
+    render = read("store/promo/render2.js")
+    require("Try everything free for 24 hours" not in poster and "No data collected" not in poster,
+            "Remove outdated promotional claims")
+    require("trialEndsAt" not in render, "Remove trial entitlement from promotional renderer")
+    require("<<<<<<<" not in listing, "Resolve listing merge conflict")
+    for name in ("1-toddlers-and-kids", "2-fly-the-sky", "3-make-a-splash", "4-wee-woo",
+                 "5-bonk-rockets", "6-twenty-rides", "7-eight-worlds", "8-made-for-kids"):
+        require((ROOT / "store/screenshots" / f"{name}.png").exists(), f"Missing screenshot: {name}")
     for error in errors:
         print("FAIL:", error)
     if errors:

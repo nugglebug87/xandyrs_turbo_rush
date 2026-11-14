@@ -74,9 +74,8 @@ Because the game is made for young children, Play Console will ask about it:
 
 - **Target audience and content**: choose the age groups (e.g. 5 and under, 6–8). This puts the app under
   the Families policy.
-- **Privacy policy URL**: required for kids' apps even if you collect nothing. Say that the app collects no
-  personal data, has no ads or analytics, and that purchases are handled by Google Play.
-- **Data safety form**: the app itself collects and shares no data. Google Play Billing handles payments.
+- **Privacy policy URL**: explain local game progress, no ads or gameplay analytics, and Google Play purchase handling.
+- **Data safety form**: inspect the final AAB, SDK declarations and traffic before answering. Billing receives purchase state and tokens.
 - **Purchases**: Families policy asks that in-app purchases are aimed at the parent. The app uses a math question before Google Play opens; review whether this is a sufficient parent gate under current Families policy. Google Play account authentication varies by configuration.
 - **Content rating questionnaire**: cartoon racing, rockets that make cars spin out (no damage or injury).
 

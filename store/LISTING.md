@@ -48,7 +48,7 @@ BUILD YOUR DREAM CAR
 
 MADE FOR KIDS AND PARENTS
 • No ads
-• No accounts, no chat and no data collection
+• No accounts, chat, ads or gameplay analytics
 • Works offline, great for car rides
 • Grown-ups-only question before any purchase
 
@@ -78,5 +78,10 @@ Premium features (Turbo and rockets) shown in screenshots require Turbo Pass. Vi
 
 The first three screenshots highlight toddler mode, Sky Zone and Water Zone.
 
-To regenerate the art after changing the game, see `promo/`: `node promo/render.js app/src/main/assets/game`
-renders the 3D frames into `promo/frames/`, then `node promo/compose.js store` builds the posters.
+To regenerate the art after changing the game (from the repository root):
+
+```sh
+node store/promo/render.js app/src/main/assets/game    # older frames: meadow, desert, snow, beach, city, space, rockets
+node store/promo/render2.js app/src/main/assets/game   # v1.1 frames: toddler vehicles, sky, water, all 20 rides
+node store/promo/compose2.js store                     # builds store/screenshots and store/feature-graphic.png
+```

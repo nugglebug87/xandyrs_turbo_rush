@@ -1,5 +1,5 @@
 // Renders cinematic raw frames from the app's bundled game for the Play Store posters.
-const { chromium } = require('/opt/node-tools/node_modules/playwright');
+const { chromium } = require('playwright');
 const path = require('path');
 const game = process.argv[2], out = path.join(__dirname, 'frames');
 require('fs').mkdirSync(out, { recursive: true });
@@ -8,6 +8,7 @@ async function open(b, w, h) {
   const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
   p.errs = []; p.on('pageerror', e => p.errs.push(e.message));
   await p.addInitScript(subscribed);
+  await p.addInitScript(() => localStorage.setItem('hairpin-rush-v1', JSON.stringify({ mode: 'kids' })));
   await p.route('**/*', r => {
     const u = new URL(r.request().url());
     if (u.host !== 'appassets.androidplatform.net') return r.abort();
@@ -62,7 +63,7 @@ async function shoot(p, file, o) {
   await p.screenshot({ path: path.join(out, file) });
 }
 (async () => {
-  const b = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+  const b = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   const shots = [
     ['hero-meadow.png', 'meadow', 'gt', 'yellow', { steps: 330, turboAt: 300, az: 32, el: 7, dist: 13, fov: 50, lookUp: 2.2 }],
     ['space-turbo.png', 'space', 'super', 'sky-blue', { steps: 420, turboAt: 395, az: 160, el: 9, dist: 13, fov: 52, lookUp: 2.4 }],
